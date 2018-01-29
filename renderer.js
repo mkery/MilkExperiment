@@ -52,7 +52,7 @@ function stationaryLoop(actors){
     actor.draw()
     ctx.translate(500,20);
   })
-  setTimeout(stationaryLoop.bind(this, actors), 300);
+  //setTimeout(stationaryLoop.bind(this, actors), 300);
 }
 
 
