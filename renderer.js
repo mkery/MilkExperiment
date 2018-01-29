@@ -55,9 +55,24 @@ function stationaryLoop(actors){
   //setTimeout(stationaryLoop.bind(this, actors), 300);
 }
 
+function loopBuddy(fun, time, repeat){
+  for(var i = 0; i < time/repeat; i ++){
+    setTimeout(fun, 500)
+  }
+  return
+}
+
 
 var title = new Actor(ctx, './images/title.svg')
-stationaryLoop([title])
+loopBuddy(() => {
+  ctx.resetTransform();
+  ctx.clearRect(0, 0, 1000, 1000);
+  ctx.translate(200,200);
+  title.draw()
+}, 10000, 500)
+
+
+
 /*var milkboy = new Actor(ctx, './images/test_1.svg')
 var mom = new Actor(ctx, './images/test.svg')
 stationaryLoop(mom, milkboy)
