@@ -1,0 +1,25 @@
+
+#artboard{
+  height: 600px;
+}
+
+.warning{
+  z-index: 100;
+  background: #ff7e7e;
+  color: #900707;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid deeppink;
+  position: absolute;
+  font-family: 'Consolas', monospace;
+}
+
+.message{
+  z-index: 100;
+  color: #900707;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid black;
+  position: absolute;
+  font-family: 'Consolas', monospace;
+}
