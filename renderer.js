@@ -55,9 +55,18 @@ function stationaryLoop(actors){
   //setTimeout(stationaryLoop.bind(this, actors), 300);
 }
 
-function loopBuddy(fun, time, repeat){
+
+function wait(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
+function timeout(fun, ms) {
+    return new Promise(resolve => setTimeout(() => {fun(); resolve();}, ms));
+}
+
+async function loopBuddy(fun, time, repeat){
   for(var i = 0; i < time/repeat; i ++){
-    setTimeout(fun, 500)
+    await timeout(fun, 500)
   }
   return
 }
@@ -69,7 +78,10 @@ loopBuddy(() => {
   ctx.clearRect(0, 0, 1000, 1000);
   ctx.translate(200,200);
   title.draw()
-}, 10000, 500)
+}, 5000, 500).then( () => {
+  ctx.resetTransform();
+  ctx.clearRect(0, 0, 1000, 1000);
+})
 
 
 
