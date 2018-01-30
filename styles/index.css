@@ -1,4 +1,8 @@
 
+body.dark{
+  background-image: url("../images/backdrop.png");
+}
+
 #artboard{
   height: 600px;
   z-index: 101;
@@ -17,12 +21,15 @@
 
 .message{
   z-index: 100;
-  min-width: 1000px;
+  min-width: 100px;
   color: #607D8B;
   padding: 10px;
   border-radius: 5px;
   position: absolute;
   font-family: 'Consolas', monospace;
+}
+.message.dark{
+  background: white;
 }
 
 
@@ -30,14 +37,14 @@
   position: absolute;
   background: radial-gradient(ellipse at center, rgba(242,48,184,0.4) 0%,rgba(125,185,232,0) 100%);
   filter: blur(5px);
-  opacity: 0;
+  opacity: 0.1;
   z-index: 50;
 }
 
 .beam2{
   position: absolute;
-  background: white;
-  opacity: 0.8;
+  background: yellow;
+  opacity: 0;
   filter: blur(15px);
   z-index: 80;
 }
