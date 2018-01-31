@@ -175,6 +175,12 @@ async function yellowSequence()
 {
   $('body').removeClass('dark')
   $('body').addClass('bananna')
+  var bananna0 = new Actor(ctx, './images/bananna.svg', 5)
+  bananna0.loop = true
+  bananna0.clearOnDraw = true
+  bananna0.draw(300, 200, 4)
+
+
 }
 
 
