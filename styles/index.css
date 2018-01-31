@@ -9,11 +9,11 @@ body.bananna{
 }
 
 @keyframes fade {
-    0% {background: white;}
+    0% {background: yellow;}
     20% {background: #fff79b;}
-    33% { background: white;}
-    53% {background: #ffc0d2;}
-    100% {background: white;}
+    33% { background: yellow;}
+    53% {background: #fff79b;}
+    100% {background: yellow;}
 }
 
 
