@@ -2,6 +2,19 @@
 body.dark{
   background-image: url("../images/backdrop.png");
 }
+body.bananna{
+  background-image: url("../images/yellow2.png")
+}
+
+@keyframes fade {
+    0% {opacity: 0.1; background-image: url("../images/yellow.png");}
+    20% {opacity: 0.1; background-image: url("../images/yellow2.png");}
+    33% {opacity: 0.1; background-image: url("../images/yellow.png");}
+    53% {opacity: 0.1; background-image: url("../images/yellow2.png");}
+    100% {opacity: 0.1; background-image: url("../images/yellow.png");}
+}
+
+
 
 #artboard{
   height: 600px;

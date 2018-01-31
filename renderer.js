@@ -78,24 +78,28 @@ async function momSequence(){
     timeout(() => milkboy.draw(550, 0), 200)
     milkboy.beam(300, 0, 150, 200).then(() => {
       timeout(null, 500).then( () => { ctx.resetTransform(); ctx.clearRect(500, 0, 1000, 1000); })
-      mom.say("YOU ARE A MESS.", 35, 280, 50).then(() => {
+      mom.say("YOU'RE BARELY A MILK CARTON.", 35, 280, 50).then(() => {
         timeout(null, 2000).then(() => {
           milkboy.loop = false
           milkboy.removeBeam()
-          milkboy.say("╚═། ◑ ▃ ◑ །═╝",  280, 280, 10).then(() => {
-                timeout(() => loopBuddy(() => {
+          milkboy.say("╚═། ◑ ▃ ◑ །═╝",  280, 240, 10).then(() => {
+                timeout(() => {
+                  mom.say("WHAT WILL YOU DO WITH YOUR LIFE?", 35, 350, 20)
+                  loopBuddy(() => {
                   milkboy.loop = true
                   ctx.resetTransform();
                   milkboy.draw(550, 0)
                   milkboy.mutate(mom)
-                }, 2000, 100), 1000).then(() => {
-                  mom.say("I'M", 35, 400, 100).then(() => mom.say("...", 60, 400, 400)).then(() => mom.say("DISSAPOINTED IN YOU", 80, 400, 200))
+                }, 2000, 100)
+              }, 1000).then(() => {
+                  mom.dark = true
+                  wait(1000).then(() => {  mom.say("I CAN'T HELP BUT BE DISSAPOINTED IN YOU.", 35, 380, 100) })
                   loopBuddy(() => {
                     var rand = 20*Math.random()
                     if(Math.ceil(rand) % 2 === 0)
                       rand *= -1
                     milkboy.draw(milkboy.posX + rand, milkboy.posY + 10)
-                  }, 7000, 100).then(() => {
+                  }, 8000, 100).then(() => {
                     $('.message').remove()
                     mom.loop = false
                     mom.run = false
@@ -153,14 +157,25 @@ async function darkSequence()
     ctx.arc(milkboy.posX + 5, 400, 200, 0, Math.PI * 2, true); // Outer circle
     ctx.fill();
     milkboy.draw(milkboy.posX + 10, milkboy.posY)
-  }, 12000, 100)
+  }, 9000, 100).then(() => {
+    $('.message').remove()
+    ctx.resetTransform();
+    ctx.clearRect(0, 0, 10000, 10000);
+    yellowSequence()
+  })
 }
 
 //momSequence()
-titleSequence()
+//titleSequence()
 //darkSequence()
+yellowSequence()
 
 
+async function yellowSequence()
+{
+  $('body').removeClass('dark')
+  $('body').addClass('bananna')
+}
 
 
 
