@@ -94,11 +94,10 @@ async function titleSequence(){ loopBuddy(() => {
   })
 }
 
-
+var mom = new Actor(ctx, './images/test_2.svg', 5)
 async function momSequence(){
   timeout(null, 500)
   //Mom enters
-  var mom = new Actor(ctx, './images/test_2.svg', 5)
   mom.loop = true
   mom.clearOnDraw = true
   milkboy.loop = true
@@ -136,16 +135,19 @@ async function momSequence(){
                     ctx.fill();
                     milkboy.draw(milkboy.posX + rand, milkboy.posY + 10)
                   }, 8000, 100).then(() => {
-                    $('.message').remove()
                     mom.loop = false
                     mom.run = false
-                    mom = null
                     milkboy.loop = false
                     milkboy.run = false
                     ctx.resetTransform();
                     ctx.clearRect(0, 0, 10000, 10000);
                     milkboy.removeBeam()
-                    darkSequence()
+                    $('body').addClass('black')
+                    wait(3000).then(() => {
+                      $('.message').remove()
+                      $('body').removeClass('black')
+                      darkSequence()
+                    })
                   })
                 })
               })
@@ -335,14 +337,73 @@ async function yellowSequence()
   ctx.clearRect(0, 0, 10000, 10000)
   await wait(1000)
   $('.message').remove()
+  $('body').removeClass('black')
+  puppySequence()
 }
 
 
+async function puppySequence()
+{
+  var coolkid = new Actor(ctx, './images/coolkid2.svg', 5)
+  var person = new Actor(ctx, './images/person.svg', 5)
+  var doggie = new Actor(ctx, './images/pupdog3.svg', 5)
+  var doggie2 = new Actor(ctx, './images/pupperfect.svg', 5)
+  await loopBuddy(() => {
+    ctx.resetTransform();
+    ctx.clearRect(0, 0, 10000, 10000)
+    doggie.draw(800,600, 1)
+    doggie.draw(500,400, 2)
+    doggie.draw(200,200, 3)
+    doggie.mutate(doggie2)
+  }, 6000, 50)
+  await loopBuddy(() => {
+    ctx.resetTransform();
+    ctx.clearRect(0, 0, 10000, 10000)
+    doggie.draw(800,600, 1)
+    doggie.draw(500,400, 2)
+    doggie.draw(200,200, 3)
+    doggie.mutate(mom)
+  }, 4000, 50)
+  await loopBuddy(() => {
+    ctx.resetTransform();
+    ctx.clearRect(0, 0, 10000, 10000)
+    doggie.draw(800,600, 1)
+    doggie.draw(500,400, 2)
+    doggie.draw(200,200, 3)
+    doggie.mutate(doggie2)
+  }, 4000, 50)
+  await loopBuddy(() => {
+    ctx.resetTransform();
+    ctx.clearRect(0, 0, 10000, 10000)
+    doggie.draw(800,600, 1)
+    doggie.draw(500,400, 2)
+    doggie.draw(200,200, 3)
+    doggie.mutate(person)
+  }, 2000, 50)
+  await loopBuddy(() => {
+    ctx.resetTransform();
+    ctx.clearRect(0, 0, 10000, 10000)
+    doggie.draw(800,600, 1)
+    doggie.draw(500,400, 2)
+    doggie.draw(200,200, 3)
+    doggie.mutate(coolkid)
+  }, 2000, 50)
+  await loopBuddy(() => {
+    ctx.resetTransform();
+    ctx.clearRect(0, 0, 10000, 10000)
+    doggie.draw(800,600, 1)
+    doggie.draw(500,400, 2)
+    doggie.draw(200,200, 3)
+    doggie.mutate(doggie2)
+  }, 4000, 50)
+
+}
+
 //momSequence()
-titleSequence()
+//titleSequence()
 //darkSequence()
 //yellowSequence()
-
+puppySequence()
 
 /*var milkboy = new Actor(ctx, './images/test_1.svg')
 var mom = new Actor(ctx, './images/test.svg')
