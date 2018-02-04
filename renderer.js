@@ -36,29 +36,57 @@ async function loopBuddy(fun, time, repeat){
 }
 
 
-var title = new Actor(ctx, './images/title_1.svg', 5)
+var title = new Actor(ctx, './images/title.svg', 5)
 var titleEnd = new Actor(ctx, './images/title_no.svg', 0)
+var unfilm = new Image(198, 45);   // using optional size for image
+unfilm.src = './images/unfilm.svg';
+var par = new Image(161, 101);   // using optional size for image
+par.src = './images/par.svg';
+var mb = new Actor(ctx, './images/marybeth.svg', 5)
+mb.dark = true
+
 async function titleSequence(){ loopBuddy(() => {
     ctx.resetTransform();
     ctx.clearRect(0, 0, 1000, 1000);
     title.draw(200, 200)
   }, 3000, 500).then( () => {
+    mb.say("MB for Art & ML Assignment 1", 450, 400, 100)
     loopBuddy(() => {
       ctx.resetTransform();
       ctx.clearRect(0, 0, 1000, 1000);
-      ctx.beginPath();
-      ctx.fillStyle = 'red';
-      ctx.arc(400, 400, 100, 0, Math.PI * 2, true); // Outer circle
-      ctx.fill();
       title.draw(200,200)
       title.flail()
-    }, 5000, 100).then( () => {
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.arc(400, 400, 200, 0, Math.PI * 2, true); // Outer circle
+      ctx.fill();
+      ctx.resetTransform();
+      ctx.drawImage(unfilm, 450, 450, 396, 90);
+      ctx.resetTransform();
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(255, 155, 155, 0.8)';
+      ctx.arc(750, 600, 100, 0, Math.PI * 2, true); // Outer circle
+      ctx.fill();
+      ctx.resetTransform();
+      ctx.drawImage(par, 700, 600, 161, 101);
+      ctx.beginPath();
+      ctx.fillStyle = 'yellow';
+      ctx.arc(900, 1000, 300, 0, Math.PI * 2, true); // Outer circle
+      ctx.fill();
+      mb.draw(200, 700,3)
+      ctx.resetTransform();
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(255, 155, 155, 0.8)';
+      ctx.arc(1000, 800, 100, 0, Math.PI * 2, true); // Outer circle
+      ctx.fill();
+    }, 8000, 100).then( () => {
       ctx.resetTransform();
       ctx.clearRect(0, 0, 1000, 1000);
     }).then(() => {
       ctx.clearRect(0, 0, 1000, 1000);
     }).then(() => {
       title.run = false
+      $('.message').remove()
       ctx.resetTransform();
       ctx.clearRect(0, 0, 1000, 1000);
       momSequence()
@@ -82,7 +110,7 @@ async function momSequence(){
       mom.say("YOU'RE BARELY A MILK CARTON.", 35, 280, 50).then(() => {
         timeout(null, 2000).then(() => {
           milkboy.loop = false
-          milkboy.removeBeam()
+          //milkboy.removeBeam()
           milkboy.say("╚═། ◑ ▃ ◑ །═╝",  280, 240, 10).then(() => {
                 timeout(() => {
                   mom.say("WHAT WILL YOU DO WITH YOUR LIFE?", 35, 350, 20)
@@ -99,6 +127,13 @@ async function momSequence(){
                     var rand = 20*Math.random()
                     if(Math.ceil(rand) % 2 === 0)
                       rand *= -1
+                    ctx.resetTransform();
+                    ctx.clearRect(milkboy.posX, milkboy.posY + 10, 200, 20);
+                    ctx.resetTransform();
+                    ctx.beginPath();
+                    ctx.fillStyle = 'rgba(255, 155, 155, 0.2)';
+                    ctx.arc(milkboy.posX, milkboy.posY, 100, 0, Math.PI * 2, true); // Outer circle
+                    ctx.fill();
                     milkboy.draw(milkboy.posX + rand, milkboy.posY + 10)
                   }, 8000, 100).then(() => {
                     $('.message').remove()
@@ -109,6 +144,7 @@ async function momSequence(){
                     milkboy.run = false
                     ctx.resetTransform();
                     ctx.clearRect(0, 0, 10000, 10000);
+                    milkboy.removeBeam()
                     darkSequence()
                   })
                 })
@@ -146,19 +182,27 @@ async function darkSequence()
     milkboy.draw(milkboy.posX, milkboy.posY)
   }, 10000, 100)
   await wait(500)
-  await milkboy.say("HELLO THERE?", 35, 400, 100)
+  await milkboy.say("HELLO THERE UNIVERSE?", 35, 400, 100)
   await wait(500)
   await milkboy.say("IS ANYONE OUT HERE?", 35, 450, 100)
   await wait(500)
   await milkboy.say("IT'S ME, MILK JR.", 35, 500, 100)
+  var flip = true
+  wait(800).then(() => {
+    milkboy.say("I'D LIKE TO FIND SOMETHING GOOD IN THIS LIFE.", 300, 400, 200)
+  })
   loopBuddy(() => {
     ctx.resetTransform();
     ctx.beginPath();
-    ctx.fillStyle = 'yellow';
+    if(flip)
+      ctx.fillStyle = 'rgba(255,255,61,0.5)';
+    else
+      ctx.fillStyle = 'rgba(255, 155, 155, 0.2)';
+    flip = !flip
     ctx.arc(milkboy.posX + 5, 400, 200, 0, Math.PI * 2, true); // Outer circle
     ctx.fill();
     milkboy.draw(milkboy.posX + 10, milkboy.posY)
-  }, 9000, 100).then(() => {
+  }, 12000, 100).then(() => {
     $('.message').remove()
     ctx.resetTransform();
     ctx.clearRect(0, 0, 10000, 10000);
@@ -179,8 +223,11 @@ async function yellowSequence()
   }, 600, 100)
 
   var rotate = 0
-  var banannafo = new Actor(ctx, './images/bananna.svg', 5)
+  var banannafo = new Actor(ctx, './images/bananna_simple.svg', 5)
   var bananna0 = new Actor(ctx, './images/bananna.svg', 5)
+  var flip = false
+  var x = 500
+  var y = 400
   loopBuddy(() => {
     rotate += 5
     if(rotate % 10 === 0)
@@ -189,7 +236,6 @@ async function yellowSequence()
       ctx.resetTransform()
       ctx.clearRect(0, 0, 10000, 10000);
     }
-    milkboy.draw(milkboy.posX, milkboy.posY)
 
     bananna0.draw(300, 200, 3, 30*rotate)
 
@@ -202,12 +248,33 @@ async function yellowSequence()
     var bananna22 = new Actor(ctx, './images/bananna.svg', 5)
     bananna22.draw(400, 400, 2, 70*rotate)
 
+    ctx.resetTransform();
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(255,255,255,'+Math.random()+')';
+    if(flip)
+    {
+      if(Math.floor(x) % 2 === 0)
+          x -= 300 * Math.random()
+      else
+          x += 301 * Math.random()
+    }
+    else
+      y += 200 * Math.random()  * -1*(Math.floor(y) % 2)
+    flip = !flip
+    ctx.arc(x, y, 200, 0, Math.PI * 2, true); // Outer circle
+    ctx.arc(x*1.8, y*1.8, Math.abs(y/10), 0, Math.PI * 2, true); // Outer circle
+    ctx.arc(x, y*1.8, Math.abs(x), 0, Math.PI * 2, true); // Outer circle
+    ctx.fill();
+
     var bananna3 = new Actor(ctx, './images/bananna.svg', 5)
     bananna3.draw(800, 700, 5, 120*rotate)
 
     var bananna4 = new Actor(ctx, './images/bananna.svg', 5)
     bananna4.draw(600, 800, 3, -30*rotate)
-  }, 12000, 600)
+
+    milkboy.draw(milkboy.posX, milkboy.posY)
+
+  }, 14000, 600)
 
   milkboy.dark = true
   await wait(1000)
@@ -233,7 +300,7 @@ async function yellowSequence()
   }, 4000, 200)
   $('.message').remove()
   bananna0.dark = true
-  await bananna0.say("DUDE WTF", 300, 200, 100)
+  await bananna0.say("DUDE (∩O□O∩) !!!", 300, 200, 100)
   await wait(500)
   await bananna0.say("YOU'RE RUINING THE VIBE", 300, 300, 80)
   await wait(800)
@@ -253,26 +320,28 @@ async function yellowSequence()
   milkboy.loop = true
   milkboy.draw(milkboy.posX, milkboy.posY)
   $('.message').remove()
-  await milkboy.say("I'M SORRY YOU GUYS", 35, 450, 100)
-  await milkboy.say("I'M STILL AN INEPT ALGORITHM", 250, 450, 80)
-  milkboy.say("... I'LL BE GOING NOW ... ... ... ...", 35, 510, 200)
+  await milkboy.say("I'M SORRY YOU GUYS", 35, 450, 200)
+  milkboy.say("... I'LL BE GOING NOW ... ... ... ... ... ...", 35, 510, 200)
   await loopBuddy(() => {
     milkboy.clearOnDraw = false
     ctx.resetTransform();
-    ctx.beginPath();
-    ctx.fillStyle = 'pink';
-    ctx.arc(milkboy.posX + 5, 500, 100, 0, Math.PI * 2, true); // Outer circle
-    ctx.fill();
-    ctx.resetTransform();
     milkboy.draw(milkboy.posX + 10, milkboy.posY)
   }, 10000, 100)
+  milkboy.loop = false
+  milkboy.run = false
+  $('body').removeClass('bananna')
+  $('body').addClass('black')
+  ctx.resetTransform()
+  ctx.clearRect(0, 0, 10000, 10000)
+  await wait(1000)
+  $('.message').remove()
 }
 
 
 //momSequence()
-//titleSequence()
+titleSequence()
 //darkSequence()
-yellowSequence()
+//yellowSequence()
 
 
 /*var milkboy = new Actor(ctx, './images/test_1.svg')
