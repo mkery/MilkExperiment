@@ -2,6 +2,15 @@
 body.dark{
   background-image: url("../images/backdrop.png");
 }
+
+body.four{
+  background-image: url("../images/404.svg");
+  background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 body.bananna{
   animation-name: fade;
   animation-iteration-count: infinite;
@@ -18,6 +27,10 @@ body.bananna{
 
 body.black{
   background: black;
+}
+
+body.red{
+  background: red;
 }
 
 
