@@ -57,7 +57,7 @@ async function titleSequence(){ loopBuddy(() => {
     ctx.resetTransform();
     ctx.clearRect(0, 0, 1000, 1000);
     title.draw(200, 200)
-  }, 3000, 500).then( () => {
+  }, 10000, 500).then( () => {
     mb.say("MB for Art & ML Assignment 1", 450, 400, 100)
     loopBuddy(() => {
       ctx.resetTransform();
@@ -339,8 +339,9 @@ async function yellowSequence()
     milkboy.draw(milkboy.posX + 10, milkboy.posY)
   }, 10000, 100)
   milkboy.loop = false
-  milkboy.run = false
   $('body').removeClass('red')
+  ctx.resetTransform()
+  ctx.clearRect(0, 0, 100000, 100000)
   $('body').addClass('black')
   /*ctx.resetTransform()
   ctx.clearRect(0, 0, 10000, 10000)
@@ -351,12 +352,12 @@ async function yellowSequence()
   bananna0.draw(300, 200, 3)
   bananna0.loop = false
   bananna0.run = false*/
-  wait(2000).then(()=>{
+  wait(500).then(()=>{
     $('.message').remove()
     ctx.resetTransform()
     ctx.clearRect(0, 0, 100000, 100000)
     $('body').removeClass('black')
-    //puppySequence()
+    cartonSequence()
   })
 }
 
@@ -601,6 +602,7 @@ async function tranformscene(){
 async function finScene(){
   ctx.resetTransform();
   mom.loop = false
+  mom.run = true
   mom.clearOnDraw = false
   milkboy.loop = false
   var x = 550
@@ -623,9 +625,36 @@ async function finScene(){
   mom.loop = true
   milkboy.loop = true
   await mom.say("MILK JR...", 35, 230, 150)
-  await mom.say("I CAN'T HELP BUT BE DISSAPOINTED IN YOU.", 35, 330, 150)
+  await mom.say("I CAN'T HELP BUT BE DISSAPOINTED IN YOU.", 35, 330, 80)
   await mom.say("WHY HUMAN?", 35, 390, 80)
   await mom.say("YOU THINK YOU'RE TOO GOOD TO BE A MILKCARTON?", 35, 430, 80)
+  mom.run = false
+  milkboy.run = false
+  mom.loop = false
+  milkboy.loop = false
+  ctx.resetTransform();
+  ctx.clearRect(0,0,10000,10000)
+  $('body').addClass('black')
+  await wait(1000)
+  $('.message').remove()
+  milkboy.dark = true
+  await milkboy.say("FRANKLY, THAT'S THE LAST TIME I'VE TALKED TO MY MOM",  200, 100, 80)
+  await wait(500)
+  await milkboy.say("I GUESS",  200, 200, 80)
+  await wait(500)
+  await milkboy.say("SHE WAS JUST A NAIVE ALGORITHM TOO",  200, 300, 80)
+  await wait(500)
+  await milkboy.say("I GUESS... I SHOULD ACCEPT THAT WE ALL ARE",  200, 400, 80)
+  await wait(500)
+  await milkboy.say("MAYBE... NOT TODAY... I'LL CALL HER.",  200, 500, 80)
+  await wait(1000)
+  $('.message').remove()
+  milkboy.removeBeam()
+  $('body').removeClass('black')
+  var fin = new Actor(ctx, './images/noussommes.svg', 5)
+  fin.loop = true
+  fin.clearOnDraw = true
+  fin.draw(100, 100, 2)
 }
 
 //momSequence()
